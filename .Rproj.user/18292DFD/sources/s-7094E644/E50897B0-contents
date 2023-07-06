@@ -1,0 +1,89 @@
+---
+title: "Métodos Computacionales para las Ciencias Sociales"
+subtitle: "Reforzamiento en programación I"  
+author: 
+  - "Klaus Lehmann"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer2.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+   fig.retina=3,
+  out.width = "70%",
+  cache = FALSE,
+  echo = T,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+options(scipen = 999)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+#style_duo_accent(
+#  primary_color = "#1381B0",
+#  secondary_color = "#FF961C",
+#  inverse_header_color = "#FFFFFF"
+#)
+xaringanExtra::use_panelset()
+
+```
+
+
+## Contenidos de la clase
+
+- Listas
+
+- Práctica 1
+
+- Funciones
+
+- Práctica 2
+
+
+---
+
+class: inverse center middle
+
+# Listas
+
+---
+
+## ¿Qué son las listas?
+
+.center[
+<img src="imagenes/lista.png" width="200" />
+]
+
+Es una estructura de datos muy útil para abordar una gran cantidad de tareas
+
+
+---
+## ¿Qué son las listas?
+
+```{r}
+mi_
+
+```
+
+
+
+
+---
+class: center, middle
+
+## Métodos Computacionales para las Ciencias Sociales
+
+### Hasta la próxima clase
+
+
