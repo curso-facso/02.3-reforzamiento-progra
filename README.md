@@ -1,7 +1,3 @@
----
-output: github_document
----
-
 
 # Clase de reforzamiento en programación (semana 3)
 
