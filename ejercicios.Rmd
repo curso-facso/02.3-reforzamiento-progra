@@ -1,0 +1,83 @@
+---
+title: "Ejercicios semana 3"
+output: pdf_document
+---
+
+## Ejercicio: suma 10
+
+Trabajaremos sobre la siguiente lista de números
+
+```{r, results='hide'}
+numeros <- list(1, 5, 9, 34, 98, 76)
+```
+
+La idea es iterar sobre la lista `numeros`, sumar 10 y reemplazar el valor original por el resultado de la suma
+
+La función `length` puede ser de utilidad
+
+
+
+```{r}
+for (i in 1:length(numeros)) {
+  numeros[[i]] <- numeros[[i]] + 10 
+}
+
+```
+
+
+
+
+# Desviación estándar
+
+$sd = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2 }$
+
+
+
+La idea es no usar `sd`
+
+Puedes probar tu función con el siguiente vector `rnorm(10000)`
+
+Pista: algunas funciones y operadores útiles son:
+
+- sum
+- sqrt
+- length
+- potencia 
+
+
+```{r}
+get_sd <- function(x) {
+
+  cuadrados <- (x - mean(x))**2 # distancias respecto a la media
+  suma_cuadrados <- sum(cuadrados) # suma de cuadrados
+  n <- length(x) # n
+  sqrt(suma_cuadrados / (n - 1)) # salida
+
+}
+
+set.seed(123)
+vector <- rnorm(n = 10000)
+get_sd(vector)
+sd(vector)
+```
+
+
+# Suma vector
+
+Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
+
+No está permitido el uso de `sum`
+
+Pista: Puede usar un `for` para sumar los elementos del vector
+
+```{r}
+sumar <- function(values) {
+  total <- 0
+  for (val in values ) {
+    total <- total + val
+  }
+  return(total)  
+}
+
+
+```
