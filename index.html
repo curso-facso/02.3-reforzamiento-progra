@@ -198,7 +198,7 @@ print(mi_lista$puma)
 
 ---
 
-## Ejercicio rápido: Lista Simpsons
+## Ejercicio express🕞: Lista Simpsons
 
 Crea una lista con tus personajes favoritos de los Simpsons. Asocia una descripción o una frase a cada personaje
 
@@ -367,13 +367,13 @@ df  %&gt;%  mutate(
 
 ```
 ## # A tibble: 5 × 4
-##       a      b     c     d
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0     0.0308 0.377 0.379
-## 2 0.395 0.640  1     0.463
-## 3 1     0.138  0.924 1    
-## 4 0.484 0      0     0    
-## 5 0.568 1      0.751 0.844
+##       a      b     c      d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.394 0.355  0.759 0.576 
+## 2 1     0      1     0.261 
+## 3 0.883 0.0154 0     0.0365
+## 4 0.305 1      0.258 1     
+## 5 0     0.234  0.271 0
 ```
 
 ---
@@ -415,8 +415,8 @@ custom_rescale(rnorm(n = 10))
 ```
 
 ```
-##  [1] 0.7874152 0.5349529 0.0000000 0.3945779 1.0000000 0.2615261 0.8394457
-##  [8] 0.8920704 0.5405283 0.3176642
+##  [1] 0.4875788 0.3108847 0.9118862 0.0000000 0.1492491 1.0000000 0.6328053
+##  [8] 0.3555271 0.8276193 0.6134418
 ```
 
 
@@ -445,13 +445,13 @@ df %&gt;%
 
 ```
 ## # A tibble: 5 × 4
-##       a      b     c     d
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0     0.0308 0.377 0.379
-## 2 0.395 0.640  1     0.463
-## 3 1     0.138  0.924 1    
-## 4 0.484 0      0     0    
-## 5 0.568 1      0.751 0.844
+##       a      b     c      d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.394 0.355  0.759 0.576 
+## 2 1     0      1     0.261 
+## 3 0.883 0.0154 0     0.0365
+## 4 0.305 1      0.258 1     
+## 5 0     0.234  0.271 0
 ```
 
 --
@@ -470,13 +470,13 @@ df %&gt;%
 
 ```
 ## # A tibble: 5 × 4
-##       a      b     c     d
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0     0.0308 0.377 0.379
-## 2 0.395 0.640  1     0.463
-## 3 1     0.138  0.924 1    
-## 4 0.484 0      0     0    
-## 5 0.568 1      0.751 0.844
+##       a      b     c      d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.394 0.355  0.759 0.576 
+## 2 1     0      1     0.261 
+## 3 0.883 0.0154 0     0.0365
+## 4 0.305 1      0.258 1     
+## 5 0     0.234  0.271 0
 ```
 
 ---
@@ -636,7 +636,7 @@ Pista: Puede usar un `for` para sumar los elementos del vector
 
 Vamos a construir una función para calcular el coeficiente de variación.
 
-`\(cv = \frac{se}{\bar{x}}\)` 
+`\(cv = \frac{se}{\bar{x}} \cdot 100\)` 
 
 **Interpretación**: Relación entre la desviación estándar de un estimador y su media.
 

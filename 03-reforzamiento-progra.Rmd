@@ -155,7 +155,7 @@ print(mi_lista$puma)
 
 ---
 
-## Ejercicio rápido: Lista Simpsons
+## Ejercicio express🕞: Lista Simpsons
 
 Crea una lista con tus personajes favoritos de los Simpsons. Asocia una descripción o una frase a cada personaje
 
@@ -491,7 +491,7 @@ Pista: Puede usar un `for` para sumar los elementos del vector
 
 Vamos a construir una función para calcular el coeficiente de variación.
 
-$cv = \frac{se}{\bar{x}}$ 
+$cv = \frac{se}{\bar{x}} \cdot 100$ 
 
 **Interpretación**: Relación entre la desviación estándar de un estimador y su media.
 
