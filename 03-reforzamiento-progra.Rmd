@@ -45,11 +45,8 @@ xaringanExtra::use_panelset()
 
 - Listas
 
-- Práctica 1
-
 - Funciones
 
-- Práctica 2
 
 
 ---
@@ -143,9 +140,34 @@ names(mi_lista) <- c("uno", "gato", "pudu", "puma")
 names(mi_lista)
 ```
 
+--
+
+### Los nombres nos pueden servir como "llaves" 
+
 ```{r}
-mi_lista$puma
+mi_lista$puma <- "El puma es un felino"
 ```
+
+```{r}
+print(mi_lista$puma)
+```
+
+
+---
+
+## Ejercicio rápido: Lista Simpsons
+
+Crea una lista con tus personajes favoritos de los Simpsons. Asocia una descripción o una frase a cada personaje
+
+Empiezo yo...
+
+```{r}
+simpsons <- list("bart" = "siempre molesto a Lisa")
+simpsons[["homero"]] <- "anda la osa"
+
+
+```
+
 
 
 ---
@@ -202,7 +224,7 @@ Trabajaremos sobre la siguiente lista de números
 numeros <- list(1, 5, 9, 34, 98, 76)
 ```
 
-La idea es iterar sobre la lista `numeros`, sumar 10 y reemplazar el valor original por el resultado de la operación
+La idea es iterar sobre la lista `numeros`, sumar 10 a cada elemento y reemplazar el valor original por el resultado de la operación
 
 La función `length` puede ser de utilidad
 
@@ -452,7 +474,34 @@ Siempre tiene prioridad el parámetro de la función sobre las variables de ambi
 
 ---
 
-## Desviación estándar
+## Ejercicio: Suma vector
+
+Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
+
+No está permitido el uso de `sum`
+
+Por ejemplo, si la función recibe el vector `c(1, 2 , 2)`, debería devoler 5
+
+Pista: Puede usar un `for` para sumar los elementos del vector
+
+
+---
+
+## Ejercicio: coeficiente de variación
+
+Vamos a construir una función para calcular el coeficiente de variación.
+
+$cv = \frac{se}{\bar{x}}$ 
+
+**Interpretación**: Relación entre la desviación estándar de un estimador y su media.
+
+No está permitido usar la función `cv`, pero sí la función `sd` y la función `mean`
+
+
+
+---
+
+## Ejercicio: desviación estándar
 
 $sd = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2 }$
 
@@ -471,15 +520,6 @@ Pista: algunas funciones útiles son:
 
 ---
 
-## Suma vector
-
-Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
-
-No está permitido el uso de `sum`
-
-Por ejemplo, si la función recibe el vector `c(1, 2 , 2)`, debería devoler 5
-
-Pista: Puede usar un `for` para sumar los elementos del vector
 
 
 

@@ -35,11 +35,8 @@ class: center, middle, inverse, title-slide
 
 - Listas
 
-- Práctica 1
-
 - Funciones
 
-- Práctica 2
 
 
 ---
@@ -180,14 +177,39 @@ names(mi_lista)
 ## [1] "uno"  "gato" "pudu" "puma"
 ```
 
+--
+
+### Los nombres nos pueden servir como "llaves" 
+
 
 ```r
-mi_lista$puma
+mi_lista$puma &lt;- "El puma es un felino"
+```
+
+
+```r
+print(mi_lista$puma)
 ```
 
 ```
-## [1] "puma"
+## [1] "El puma es un felino"
 ```
+
+
+---
+
+## Ejercicio rápido: Lista Simpsons
+
+Crea una lista con tus personajes favoritos de los Simpsons. Asocia una descripción o una frase a cada personaje
+
+Empiezo yo...
+
+
+```r
+simpsons &lt;- list("bart" = "siempre molesto a Lisa")
+simpsons[["homero"]] &lt;- "anda la osa"
+```
+
 
 
 ---
@@ -209,7 +231,7 @@ for (i in mi_lista) {
 ## [1] 1
 ## [1] "gato"
 ## [1] "pudú"
-## [1] "puma"
+## [1] "El puma es un felino"
 ```
 
 
@@ -270,7 +292,7 @@ Trabajaremos sobre la siguiente lista de números
 numeros &lt;- list(1, 5, 9, 34, 98, 76)
 ```
 
-La idea es iterar sobre la lista `numeros`, sumar 10 y reemplazar el valor original por el resultado de la operación
+La idea es iterar sobre la lista `numeros`, sumar 10 a cada elemento y reemplazar el valor original por el resultado de la operación
 
 La función `length` puede ser de utilidad
 
@@ -345,13 +367,13 @@ df  %&gt;%  mutate(
 
 ```
 ## # A tibble: 5 × 4
-##        a     b     c     d
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0.0761 1     0.129 0.501
-## 2 1      0     0.233 1    
-## 3 0      0.420 1     0.619
-## 4 0.658  0.868 0     0.624
-## 5 0.347  0.639 0.432 0
+##       a      b     c     d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0     0.0308 0.377 0.379
+## 2 0.395 0.640  1     0.463
+## 3 1     0.138  0.924 1    
+## 4 0.484 0      0     0    
+## 5 0.568 1      0.751 0.844
 ```
 
 ---
@@ -393,8 +415,8 @@ custom_rescale(rnorm(n = 10))
 ```
 
 ```
-##  [1] 0.2778109 0.2911194 0.3058033 0.4978419 0.0000000 1.0000000 0.3142293
-##  [8] 0.8668529 0.7295152 0.1725017
+##  [1] 0.7874152 0.5349529 0.0000000 0.3945779 1.0000000 0.2615261 0.8394457
+##  [8] 0.8920704 0.5405283 0.3176642
 ```
 
 
@@ -423,13 +445,13 @@ df %&gt;%
 
 ```
 ## # A tibble: 5 × 4
-##        a     b     c     d
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0.0761 1     0.129 0.501
-## 2 1      0     0.233 1    
-## 3 0      0.420 1     0.619
-## 4 0.658  0.868 0     0.624
-## 5 0.347  0.639 0.432 0
+##       a      b     c     d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0     0.0308 0.377 0.379
+## 2 0.395 0.640  1     0.463
+## 3 1     0.138  0.924 1    
+## 4 0.484 0      0     0    
+## 5 0.568 1      0.751 0.844
 ```
 
 --
@@ -448,13 +470,13 @@ df %&gt;%
 
 ```
 ## # A tibble: 5 × 4
-##        a     b     c     d
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 0.0761 1     0.129 0.501
-## 2 1      0     0.233 1    
-## 3 0      0.420 1     0.619
-## 4 0.658  0.868 0     0.624
-## 5 0.347  0.639 0.432 0
+##       a      b     c     d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0     0.0308 0.377 0.379
+## 2 0.395 0.640  1     0.463
+## 3 1     0.138  0.924 1    
+## 4 0.484 0      0     0    
+## 5 0.568 1      0.751 0.844
 ```
 
 ---
@@ -597,7 +619,34 @@ Siempre tiene prioridad el parámetro de la función sobre las variables de ambi
 
 ---
 
-## Desviación estándar
+## Ejercicio: Suma vector
+
+Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
+
+No está permitido el uso de `sum`
+
+Por ejemplo, si la función recibe el vector `c(1, 2 , 2)`, debería devoler 5
+
+Pista: Puede usar un `for` para sumar los elementos del vector
+
+
+---
+
+## Ejercicio: coeficiente de variación
+
+Vamos a construir una función para calcular el coeficiente de variación.
+
+`\(cv = \frac{se}{\bar{x}}\)` 
+
+**Interpretación**: Relación entre la desviación estándar de un estimador y su media.
+
+No está permitido usar la función `cv`, pero sí la función `sd` y la función `mean`
+
+
+
+---
+
+## Ejercicio: desviación estándar
 
 `\(sd = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2 }\)`
 
@@ -616,15 +665,6 @@ Pista: algunas funciones útiles son:
 
 ---
 
-## Suma vector
-
-Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
-
-No está permitido el uso de `sum`
-
-Por ejemplo, si la función recibe el vector `c(1, 2 , 2)`, debería devoler 5
-
-Pista: Puede usar un `for` para sumar los elementos del vector
 
 
 
