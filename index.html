@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 # Métodos Computacionales para las Ciencias Sociales
 ]
 .subtitle[
-## Reforzamiento en programación II
+## Reforzamiento en programación III
 ]
 .author[
 ### Klaus Lehmann
@@ -33,188 +33,24 @@ class: center, middle, inverse, title-slide
 
 ## Contenidos de la clase
 
-- Listas
-
 - Funciones
 
 
 
 ---
 
-class: inverse center middle
+## Recordando la clase anterior...
 
-# Listas
-
----
-
-## ¿Qué son las listas?
-
-.center[
-&lt;img src="imagenes/lista.png" width="200" /&gt;
-]
-
---
-
-Estructura que nos permite ordenar datos de distinto tipo 
- 
+Tenemos una lista de animales
 
 
 ```r
-mi_lista &lt;- list(1, "perro")
-```
-
-
----
-
-## Índices de una lista 
-
-Podemos acceder a los elementos mediante sus índices
-
-
-```r
-mi_lista[[2]]
-```
-
-```
-## [1] "perro"
-```
-
---
-
-Podemos cambiar los elementos
-
-
-```r
-mi_lista[[2]] &lt;- "gato"
-mi_lista
-```
-
-```
-## [[1]]
-## [1] 1
-## 
-## [[2]]
-## [1] "gato"
-```
-
----
-
-## Agregar alementos  
-
-Puedo agregar elementos a mi lista
-
-.pull-left[
-&lt;img src="imagenes/pudu.jpeg" width="200" /&gt;
-]
-
-.pull-right[
-
-
-```r
-mi_lista[[3]] &lt;- "pudú"
-mi_lista
-```
-
-```
-## [[1]]
-## [1] 1
-## 
-## [[2]]
-## [1] "gato"
-## 
-## [[3]]
-## [1] "pudú"
-```
-
-]
-
-
----
-
-## Agregar elementos
-
-También podemos usar append
-
-.pull-left[
-&lt;img src="imagenes/puma.jpg" width="300" /&gt;
-]
-
-
-.pull-right[
-
-```r
-mi_lista &lt;- append(mi_lista, "puma")
-mi_lista
-```
-
-```
-## [[1]]
-## [1] 1
-## 
-## [[2]]
-## [1] "gato"
-## 
-## [[3]]
-## [1] "pudú"
-## 
-## [[4]]
-## [1] "puma"
-```
-]
-
-
----
-## Agreguemos nombres
-
-
-
-```r
+mi_lista &lt;- list(1, "perro", "gato", "pudú", "puma")
 names(mi_lista) &lt;- c("uno", "gato", "pudu", "puma")
-names(mi_lista)
-```
-
-```
-## [1] "uno"  "gato" "pudu" "puma"
-```
-
---
-
-### Los nombres nos pueden servir como "llaves" 
-
-
-```r
 mi_lista$puma &lt;- "El puma es un felino"
 ```
 
-
-```r
-print(mi_lista$puma)
-```
-
-```
-## [1] "El puma es un felino"
-```
-
-
----
-
-## Ejercicio express🕞: Lista Simpsons
-
-Crea una lista con tus personajes favoritos de los Simpsons. Asocia una descripción o una frase a cada personaje
-
-Empiezo yo...
-
-
-```r
-simpsons &lt;- list("bart" = "siempre molesto a Lisa")
-simpsons[["homero"]] &lt;- "anda la osa"
-```
-
-
-
----
-
-## Recordando la clase anterior...
+--
 
 Podemos iterar sobre listas
 
@@ -229,9 +65,10 @@ for (i in mi_lista) {
 
 ```
 ## [1] 1
+## [1] "perro"
 ## [1] "gato"
-## [1] "pudú"
 ## [1] "El puma es un felino"
+## [1] "puma"
 ```
 
 
@@ -245,19 +82,7 @@ for (i in mi_lista) {
 nueva_lista &lt;- list(numeros = c( 2 ,3), animales = c("puma", "pudú", "condor"), bandas = c("queen", "acdc") )
 ```
 
---
 
-Comentario al margen: los dataframes en R se implementan como listas
-
-
-```r
-df &lt;- data.frame(numeros = c(1, 2 ,3), animales = c("puma", "pudú", "condor"))
-typeof(df)
-```
-
-```
-## [1] "list"
-```
 
 ---
 
@@ -321,6 +146,30 @@ A veces, necesitamos crear nuestras propias funciones
 
 ---
 
+## Concepto de función
+
+En términos coloquiales:
+
+Un dispositivo que:
+
+- Recibe una entrada
+- Realiza un procedimiento a partir de la entrada
+- Devuelve el resultado del procedimiento
+
+--
+
+Función media:
+
+- Recibe *n* números
+- Suma todos los números y los divide por el total de elementos
+- Devuelve el resultado (media)
+
+--
+
+**Tiene similitudes con la definición matemática, pero en programación somos menos formales**
+
+---
+
 ## DRY: Don't repeat yourself
 
 
@@ -367,13 +216,13 @@ df  %&gt;%  mutate(
 
 ```
 ## # A tibble: 5 × 4
-##       a      b     c      d
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 0.394 0.355  0.759 0.576 
-## 2 1     0      1     0.261 
-## 3 0.883 0.0154 0     0.0365
-## 4 0.305 1      0.258 1     
-## 5 0     0.234  0.271 0
+##        a     b      c      d
+##    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 1      1     1      0.0334
+## 2 0.678  0     0      0     
+## 3 0.0727 0.390 0.0168 1     
+## 4 0.500  0.210 0.231  0.743 
+## 5 0      0.819 0.896  0.323
 ```
 
 ---
@@ -415,8 +264,8 @@ custom_rescale(rnorm(n = 10))
 ```
 
 ```
-##  [1] 0.4875788 0.3108847 0.9118862 0.0000000 0.1492491 1.0000000 0.6328053
-##  [8] 0.3555271 0.8276193 0.6134418
+##  [1] 1.00000000 0.85249137 0.16595894 0.34679850 0.01269007 0.77702538
+##  [7] 0.58231658 0.04193616 0.00000000 0.95667850
 ```
 
 
@@ -445,13 +294,13 @@ df %&gt;%
 
 ```
 ## # A tibble: 5 × 4
-##       a      b     c      d
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 0.394 0.355  0.759 0.576 
-## 2 1     0      1     0.261 
-## 3 0.883 0.0154 0     0.0365
-## 4 0.305 1      0.258 1     
-## 5 0     0.234  0.271 0
+##        a     b      c      d
+##    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 1      1     1      0.0334
+## 2 0.678  0     0      0     
+## 3 0.0727 0.390 0.0168 1     
+## 4 0.500  0.210 0.231  0.743 
+## 5 0      0.819 0.896  0.323
 ```
 
 --
@@ -470,13 +319,13 @@ df %&gt;%
 
 ```
 ## # A tibble: 5 × 4
-##       a      b     c      d
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 0.394 0.355  0.759 0.576 
-## 2 1     0      1     0.261 
-## 3 0.883 0.0154 0     0.0365
-## 4 0.305 1      0.258 1     
-## 5 0     0.234  0.271 0
+##        a     b      c      d
+##    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 1      1     1      0.0334
+## 2 0.678  0     0      0     
+## 3 0.0727 0.390 0.0168 1     
+## 4 0.500  0.210 0.231  0.743 
+## 5 0      0.819 0.896  0.323
 ```
 
 ---
@@ -619,6 +468,52 @@ Siempre tiene prioridad el parámetro de la función sobre las variables de ambi
 
 ---
 
+## R es lazy
+
+Esto se llama *lazy evalue*
+
+
+```r
+add_three_numbers &lt;- function(x, y, q) {
+  w &lt;- x + y  
+  return(w)
+}
+
+add_three_numbers(1, 2)
+```
+
+```
+## [1] 3
+```
+
+--
+
+`R` no evalua las expresiones hasta que realmente las necesita
+
+La variable q no se usa en ningún momento
+
+---
+
+## Otros lenguajes
+
+Python funciona de otra manera
+
+
+```python
+def add_three_numbers(x, y, q):
+  w &lt;- x + y  
+  return w
+
+add_three_numbers(1, 2)
+```
+
+```
+## TypeError: add_three_numbers() missing 1 required positional argument: 'q'
+```
+
+
+---
+
 ## Ejercicio: Suma vector
 
 Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
@@ -664,8 +559,18 @@ Pista: algunas funciones útiles son:
 
 
 ---
+## Comentarios finales
+
+Las funciones son una pieza fundamental de la programación
+
+--
+
+Nos permiten abstrear tareas y generar código más legible
+
+--
 
 
+Las usaremos durante el semestre
 
 
 

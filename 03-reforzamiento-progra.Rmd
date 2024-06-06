@@ -1,6 +1,6 @@
 ---
 title: "Métodos Computacionales para las Ciencias Sociales"
-subtitle: "Reforzamiento en programación II"  
+subtitle: "Reforzamiento en programación III"  
 author: 
   - "Klaus Lehmann"
 output:
@@ -43,136 +43,24 @@ xaringanExtra::use_panelset()
 
 ## Contenidos de la clase
 
-- Listas
-
 - Funciones
 
 
 
 ---
 
-class: inverse center middle
-
-# Listas
-
----
-
-## ¿Qué son las listas?
-
-.center[
-<img src="imagenes/lista.png" width="200" />
-]
-
---
-
-Estructura que nos permite ordenar datos de distinto tipo 
- 
-
-```{r}
-mi_lista <- list(1, "perro")
-```
-
-
----
-
-## Índices de una lista 
-
-Podemos acceder a los elementos mediante sus índices
-
-```{r}
-mi_lista[[2]]
-```
-
---
-
-Podemos cambiar los elementos
-
-```{r}
-mi_lista[[2]] <- "gato"
-mi_lista
-```
-
----
-
-## Agregar alementos  
-
-Puedo agregar elementos a mi lista
-
-.pull-left[
-<img src="imagenes/pudu.jpeg" width="200" />
-]
-
-.pull-right[
-
-```{r}
-mi_lista[[3]] <- "pudú"
-mi_lista
-```
-
-]
-
-
----
-
-## Agregar elementos
-
-También podemos usar append
-
-.pull-left[
-<img src="imagenes/puma.jpg" width="300" />
-]
-
-
-.pull-right[
-```{r}
-mi_lista <- append(mi_lista, "puma")
-mi_lista
-```
-]
-
-
----
-## Agreguemos nombres
-
-
-```{r}
-names(mi_lista) <- c("uno", "gato", "pudu", "puma")
-names(mi_lista)
-```
-
---
-
-### Los nombres nos pueden servir como "llaves" 
-
-```{r}
-mi_lista$puma <- "El puma es un felino"
-```
-
-```{r}
-print(mi_lista$puma)
-```
-
-
----
-
-## Ejercicio express🕞: Lista Simpsons
-
-Crea una lista con tus personajes favoritos de los Simpsons. Asocia una descripción o una frase a cada personaje
-
-Empiezo yo...
-
-```{r}
-simpsons <- list("bart" = "siempre molesto a Lisa")
-simpsons[["homero"]] <- "anda la osa"
-
-
-```
-
-
-
----
-
 ## Recordando la clase anterior...
+
+Tenemos una lista de animales
+
+```{r}
+mi_lista <- list(1, "perro", "gato", "pudú", "puma")
+names(mi_lista) <- c("uno", "gato", "pudu", "puma")
+mi_lista$puma <- "El puma es un felino"
+
+```
+
+--
 
 Podemos iterar sobre listas
 
@@ -194,14 +82,7 @@ for (i in mi_lista) {
 nueva_lista <- list(numeros = c( 2 ,3), animales = c("puma", "pudú", "condor"), bandas = c("queen", "acdc") )
 ```
 
---
 
-Comentario al margen: los dataframes en R se implementan como listas
-
-```{r}
-df <- data.frame(numeros = c(1, 2 ,3), animales = c("puma", "pudú", "condor"))
-typeof(df)
-```
 
 ---
 
@@ -250,6 +131,30 @@ Ustedes conocen muchas funciones
 --
 
 A veces, necesitamos crear nuestras propias funciones
+
+---
+
+## Concepto de función
+
+En términos coloquiales:
+
+Un dispositivo que:
+
+- Recibe una entrada
+- Realiza un procedimiento a partir de la entrada
+- Devuelve el resultado del procedimiento
+
+--
+
+Función media:
+
+- Recibe *n* números
+- Suma todos los números y los divide por el total de elementos
+- Devuelve el resultado (media)
+
+--
+
+**Tiene similitudes con la definición matemática, pero en programación somos menos formales**
 
 ---
 
@@ -474,6 +379,42 @@ Siempre tiene prioridad el parámetro de la función sobre las variables de ambi
 
 ---
 
+## R es lazy
+
+Esto se llama *lazy evalue*
+
+```{r}
+add_three_numbers <- function(x, y, q) {
+  w <- x + y  
+  return(w)
+}
+
+add_three_numbers(1, 2)
+```
+
+--
+
+`R` no evalua las expresiones hasta que realmente las necesita
+
+La variable q no se usa en ningún momento
+
+---
+
+## Otros lenguajes
+
+Python funciona de otra manera
+
+```{python, error = T}
+def add_three_numbers(x, y, q):
+  w <- x + y  
+  return w
+
+add_three_numbers(1, 2)
+```
+
+
+---
+
 ## Ejercicio: Suma vector
 
 Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
@@ -519,8 +460,18 @@ Pista: algunas funciones útiles son:
 
 
 ---
+## Comentarios finales
+
+Las funciones son una pieza fundamental de la programación
+
+--
+
+Nos permiten abstrear tareas y generar código más legible
+
+--
 
 
+Las usaremos durante el semestre
 
 
 
