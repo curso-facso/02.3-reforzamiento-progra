@@ -71,7 +71,9 @@ for (i in mi_lista) {
 
 
 ```{r}
-nueva_lista <- list(numeros = c( 2 ,3), animales = c("puma", "pudú", "condor"), bandas = c("queen", "acdc") )
+nueva_lista <- list(numeros = c( 2 ,3), 
+                    animales = c("puma", "pudú", "condor"),
+                    bandas = c("queen", "acdc") )
 ```
 
 

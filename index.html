@@ -430,7 +430,9 @@
 <section id="listas-anidadas" class="slide level2">
 <h2>Listas anidadas</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>nueva_lista <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">numeros =</span> <span class="fu">c</span>( <span class="dv">2</span> ,<span class="dv">3</span>), <span class="at">animales =</span> <span class="fu">c</span>(<span class="st">"puma"</span>, <span class="st">"pudú"</span>, <span class="st">"condor"</span>), <span class="at">bandas =</span> <span class="fu">c</span>(<span class="st">"queen"</span>, <span class="st">"acdc"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>nueva_lista <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">numeros =</span> <span class="fu">c</span>( <span class="dv">2</span> ,<span class="dv">3</span>), </span>
+<span id="cb4-2"><a href=""></a>                    <span class="at">animales =</span> <span class="fu">c</span>(<span class="st">"puma"</span>, <span class="st">"pudú"</span>, <span class="st">"condor"</span>),</span>
+<span id="cb4-3"><a href=""></a>                    <span class="at">bandas =</span> <span class="fu">c</span>(<span class="st">"queen"</span>, <span class="st">"acdc"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="listas-anidadas-1" class="slide level2">
@@ -522,13 +524,13 @@
 <span id="cb11-10"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
-      a      b     c     d
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 0.738 0.701  0     0.118
-2 0     0.0600 0.646 0.673
-3 0.151 0.292  1     0.799
-4 1     1      0.616 1    
-5 0.847 0      0.358 0    </code></pre>
+       a     b      c     d
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 0      0.822 0      0    
+2 0.0163 1     0.953  1    
+3 0.381  0.756 1      0.592
+4 0.627  0     0.0768 0.458
+5 1      0.942 0.492  0.796</code></pre>
 </div>
 </div>
 </section>
@@ -553,8 +555,8 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">custom_rescale</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1.00000000 0.16277687 0.06805013 0.09295294 0.07829125 0.00000000
- [7] 0.70982121 0.27830342 0.40295377 0.99413055</code></pre>
+<pre><code> [1] 0.08305787 0.34995014 0.50861009 0.66048112 0.00000000 0.57607648
+ [7] 0.18149182 1.00000000 0.02803124 0.81671400</code></pre>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -575,13 +577,13 @@
 <span id="cb17-7"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
-      a      b     c     d
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 0.738 0.701  0     0.118
-2 0     0.0600 0.646 0.673
-3 0.151 0.292  1     0.799
-4 1     1      0.616 1    
-5 0.847 0      0.358 0    </code></pre>
+       a     b      c     d
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 0      0.822 0      0    
+2 0.0163 1     0.953  1    
+3 0.381  0.756 1      0.592
+4 0.627  0     0.0768 0.458
+5 1      0.942 0.492  0.796</code></pre>
 </div>
 </div>
 <h3 id="podemos-hacerlo-mejor">¿Podemos hacerlo mejor?</h3>
@@ -593,13 +595,13 @@
 <span id="cb19-2"><a href=""></a>  <span class="fu">mutate_all</span>(custom_rescale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
-      a      b     c     d
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 0.738 0.701  0     0.118
-2 0     0.0600 0.646 0.673
-3 0.151 0.292  1     0.799
-4 1     1      0.616 1    
-5 0.847 0      0.358 0    </code></pre>
+       a     b      c     d
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 0      0.822 0      0    
+2 0.0163 1     0.953  1    
+3 0.381  0.756 1      0.592
+4 0.627  0     0.0768 0.458
+5 1      0.942 0.492  0.796</code></pre>
 </div>
 </div>
 </section>
