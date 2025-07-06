@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Métodos Computacionales para las Ciencias Sociales</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Klaus Lehmann" />
+    <script src="03-reforzamiento-progra_files/header-attrs/header-attrs.js"></script>
+    <link href="03-reforzamiento-progra_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="03-reforzamiento-progra_files/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer2.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Métodos Computacionales para las Ciencias Sociales
+]
+.subtitle[
+## Reforzamiento en programación III
+]
+.author[
+### Klaus Lehmann
+]
+
+---
+
+
+
+
+
+
+
+## Contenidos de la clase
+
+- Funciones
+
+
+
+---
+
+## Recordando la clase anterior...
+
+Tenemos una lista de animales
+
+
+``` r
+mi_lista &lt;- list(1, "perro", "gato", "pudú", "puma")
+names(mi_lista) &lt;- c("uno", "gato", "pudu", "puma")
+mi_lista$puma &lt;- "El puma es un felino"
+```
+
+--
+
+Podemos iterar sobre listas
+
+--
+
+
+``` r
+for (i in mi_lista) {
+    print(i)
+}
+```
+
+```
+## [1] 1
+## [1] "perro"
+## [1] "gato"
+## [1] "El puma es un felino"
+## [1] "puma"
+```
+
+
+---
+
+## Listas anidadas
+
+
+
+``` r
+nueva_lista &lt;- list(numeros = c( 2 ,3), animales = c("puma", "pudú", "condor"), bandas = c("queen", "acdc") )
+```
+
+
+
+---
+
+## Listas anidadas
+
+
+
+``` r
+nueva_lista[[3]][2]
+```
+
+```
+## [1] "acdc"
+```
+
+``` r
+nueva_lista$bandas[2]
+```
+
+```
+## [1] "acdc"
+```
+
+---
+
+## Ejercicio: suma 10
+
+Trabajaremos sobre la siguiente lista de números
+
+
+``` r
+numeros &lt;- list(1, 5, 9, 34, 98, 76)
+```
+
+La idea es iterar sobre la lista `numeros`, sumar 10 a cada elemento y reemplazar el valor original por el resultado de la operación
+
+La función `length` puede ser de utilidad
+
+
+---
+
+class: inverse center middle
+
+# funciones
+
+
+---
+
+## Ejemplos de funciones
+
+Ustedes conocen muchas funciones
+
+- mean
+- max
+- min
+- etc
+
+--
+
+A veces, necesitamos crear nuestras propias funciones
+
+---
+
+## Concepto de función
+
+En términos coloquiales:
+
+Un dispositivo que:
+
+- Recibe una entrada
+- Realiza un procedimiento a partir de la entrada
+- Devuelve el resultado del procedimiento
+
+--
+
+Función media:
+
+- Recibe *n* números
+- Suma todos los números y los divide por el total de elementos
+- Devuelve el resultado (media)
+
+--
+
+**Tiene similitudes con la definición matemática, pero en programación somos menos formales**
+
+---
+
+## DRY: Don't repeat yourself
+
+
+.center[
+&lt;img src="imagenes/dry.png" width="300" /&gt;
+]
+
+
+---
+
+## Ejemplo R for DS
+
+Queremos rescalar las 4 columnas de este *dataframe*, para que estén entre 0 y 1
+
+
+``` r
+df &lt;- tibble(
+  a = rnorm(5),
+  b = rnorm(5),
+  c = rnorm(5),
+  d = rnorm(5),
+)
+```
+
+`\(rescale = \frac{ (x - min(x)) }{ (max(x) - min(x))}\)`
+
+
+
+--
+
+
+``` r
+df  %&gt;%  mutate(
+  a = (a - min(a, na.rm = TRUE)) / 
+    (max(a, na.rm = TRUE) - min(a, na.rm = TRUE)),
+  b = (b - min(b, na.rm = TRUE)) / 
+    (max(b, na.rm = TRUE) - min(b, na.rm = TRUE)),
+  c = (c - min(c, na.rm = TRUE)) / 
+    (max(c, na.rm = TRUE) - min(c, na.rm = TRUE)),
+  d = (d - min(d, na.rm = TRUE)) / 
+    (max(d, na.rm = TRUE) - min(d, na.rm = TRUE)),
+)
+```
+
+```
+## # A tibble: 5 × 4
+##       a     b     c     d
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.932 0     1     0.741
+## 2 0     1     0.851 0.313
+## 3 1     0.653 0.817 1    
+## 4 0.300 0.741 0     0.660
+## 5 0.785 0.114 0.576 0
+```
+
+---
+
+## ¿Cuál es la parte que va variando?
+
+
+
+``` r
+(a - min(a, na.rm = TRUE)) / (max(a, na.rm = TRUE) - min(a, na.rm = TRUE))
+(b - min(b, na.rm = TRUE)) / (max(b, na.rm = TRUE) - min(b, na.rm = TRUE))
+(c - min(c, na.rm = TRUE)) / (max(c, na.rm = TRUE) - min(c, na.rm = TRUE))
+(d - min(d, na.rm = TRUE)) / (max(d, na.rm = TRUE) - min(d, na.rm = TRUE)) 
+```
+
+
+--
+
+La variable es lo único que va cambiando
+
+---
+
+## Nuestra propia función
+
+
+
+``` r
+custom_rescale &lt;- function(x) {
+  new_values &lt;-  (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+  return(new_values)
+}
+```
+
+--
+
+
+``` r
+custom_rescale(rnorm(n = 10))
+```
+
+```
+##  [1] 0.8002574 0.2274368 0.2413975 0.0000000 0.5262951 0.4884212 0.5799785
+##  [8] 0.7837013 0.1224846 1.0000000
+```
+
+
+--
+
+.center[
+&lt;img src="imagenes/alive.png" width="350" /&gt;
+]
+
+
+
+---
+
+## Usando nuestra función
+
+
+``` r
+df %&gt;% 
+  mutate(
+  a = custom_rescale(a),
+  b = custom_rescale(b),
+  c = custom_rescale(c),
+  d = custom_rescale(d),
+)
+```
+
+```
+## # A tibble: 5 × 4
+##       a     b     c     d
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.932 0     1     0.741
+## 2 0     1     0.851 0.313
+## 3 1     0.653 0.817 1    
+## 4 0.300 0.741 0     0.660
+## 5 0.785 0.114 0.576 0
+```
+
+--
+
+### ¿Podemos hacerlo mejor?
+
+---
+
+## En una línea 
+
+
+``` r
+df %&gt;% 
+  mutate_all(custom_rescale)
+```
+
+```
+## # A tibble: 5 × 4
+##       a     b     c     d
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.932 0     1     0.741
+## 2 0     1     0.851 0.313
+## 3 1     0.653 0.817 1    
+## 4 0.300 0.741 0     0.660
+## 5 0.785 0.114 0.576 0
+```
+
+---
+
+## Desarmemos la función
+
+Las funciones tienes 3 componentes
+
+- *formals* (parámetros o argumentos)
+- *body* (lo que hace la función)
+- *environment* (contenido más avanzado)
+
+--
+
+
+``` r
+formals(custom_rescale)
+```
+
+```
+## $x
+```
+
+
+--
+
+
+``` r
+body(custom_rescale)
+```
+
+```
+## {
+##     new_values &lt;- (x - min(x, na.rm = TRUE))/(max(x, na.rm = TRUE) - 
+##         min(x, na.rm = TRUE))
+##     return(new_values)
+## }
+```
+
+---
+
+## *Scope* de un función
+
+
+``` r
+z = 90
+add_two_numbers &lt;- function(x, y) {
+  z &lt;- x + y  
+  return(z)
+}
+
+add_two_numbers(2, 3)
+```
+
+```
+## [1] 5
+```
+
+``` r
+print(z)
+```
+
+```
+## [1] 90
+```
+
+En realidad, existen 2 variables `z` 
+
+Una vive en el ambiente global y la otra vive dentro de `add_two_numbers`
+
+---
+
+## *Scope* de un función
+
+
+``` r
+rm(z) # remover variable z
+add_two_numbers &lt;- function(x, y) {
+  z &lt;- x + y  
+  return(z)
+}
+```
+
+¿Qué pasa si ponemos `print(z)`?
+
+--
+
+`z` vive dentro de `add_two_numbers`
+
+
+---
+
+## *Scope* de un función
+
+
+``` r
+add_three_numbers &lt;- function(x, y) {
+  w &lt;- x + y + z  
+  return(w)
+}
+```
+
+--
+
+
+``` r
+z &lt;- 10
+add_three_numbers(1, 3)
+```
+
+```
+## [1] 14
+```
+
+Si algo falta en el scope de la función, `R` busca en el ambiente global[1]. 
+
+.footnote[
+[1] En realidad, busca en el ambiente en el que fue creada la función]
+
+
+---
+## *Scope* de un función
+
+
+
+``` r
+add_three_numbers &lt;- function(x, y, z) {
+  w &lt;- x + y + z  
+  return(w)
+}
+z &lt;- 10
+add_three_numbers(1, 3, 1)
+```
+
+```
+## [1] 5
+```
+
+Siempre tiene prioridad el parámetro de la función sobre las variables de ambiente
+
+---
+
+## R es lazy
+
+Esto se llama *lazy evalue*
+
+
+``` r
+add_three_numbers &lt;- function(x, y, q) {
+  w &lt;- x + y  
+  return(w)
+}
+
+add_three_numbers(1, 2)
+```
+
+```
+## [1] 3
+```
+
+--
+
+`R` no evalua las expresiones hasta que realmente las necesita
+
+La variable q no se usa en ningún momento
+
+---
+
+## Otros lenguajes
+
+Python funciona de otra manera
+
+
+``` python
+def add_three_numbers(x, y, q):
+  w &lt;- x + y  
+  return w
+
+add_three_numbers(1, 2)
+```
+
+```
+## TypeError: add_three_numbers() missing 1 required positional argument: 'q'
+```
+
+
+---
+
+## Ejercicio: Suma vector
+
+Queremos una función que reciba un vector numérico y retorne la suma de todos sus elementos.
+
+No está permitido el uso de `sum`
+
+Por ejemplo, si la función recibe el vector `c(1, 2 , 2)`, debería devoler 5
+
+Pista: Puede usar un `for` para sumar los elementos del vector
+
+
+---
+
+## Ejercicio: coeficiente de variación
+
+Vamos a construir una función para calcular el coeficiente de variación.
+
+`\(cv = \frac{se}{\bar{x}} \cdot 100\)` 
+
+**Interpretación**: Relación entre la desviación estándar de un estimador y su media.
+
+No está permitido usar la función `cv`, pero sí la función `sd` y la función `mean`
+
+
+
+---
+
+## Ejercicio: desviación estándar
+
+`\(sd = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2 }\)`
+
+--
+
+La idea es no usar `sd`
+
+Puede probar tu función con el siguiente vector `rnorm(10000)`
+
+Pista: algunas funciones útiles son:
+
+- sum
+- sqrt
+- length
+
+
+---
+## Comentarios finales
+
+Las funciones son una pieza fundamental de la programación
+
+--
+
+Nos permiten abstrear tareas y generar código más legible
+
+--
+
+
+Las usaremos durante el semestre
+
+
+
+---
+class: center, middle
+
+## Métodos Computacionales para las Ciencias Sociales
+
+### Hasta la próxima clase
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "slideNumberFormat": "%current%",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "ratio": "16:9",
+  "countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
